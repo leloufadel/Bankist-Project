@@ -9,7 +9,14 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
-const section1 = document.getElementById('section--1')
+const section1 = document.getElementById('section--1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations_content');
+
+
+
+
 const openModal = function (e) {
   e.preventDefault();
 
@@ -126,7 +133,43 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
         behavior: 'smooth'
       });
   }
+});
+
+// updown
+console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'red';
+// going upwards
+
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)'
+
+h1.closest('h1').style.background = 'var(--gradient-primary)'
+
+
+// Going sideways: siblings 
+
+// console.log(h1.parentElement.children);
+
+// [...h1.parentElement.children].forEach(function(el) {
+//   if(el !== h1) el.style.transform = 'scale(0.5)'
+// })
+// use event delegation which is better than 
+// tabs.forEach(t => t.addEventlistner('click', () => console.log('TAB')))
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+// if there is no clicked then return nothing
+if(!clicked) return ;
+// Active tab
+console.log(tabs)
+tabs.forEach(tab => tab.classList.remove('.operations__tab--active'))
+
+clicked.classList.add('operations__tab--active');
+
 })
-
-
-
