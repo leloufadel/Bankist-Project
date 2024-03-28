@@ -12,8 +12,7 @@ const h1 = document.querySelector('h1');
 const section1 = document.getElementById('section--1');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations_content');
-
+const tabsContent = document.querySelectorAll('.operations__content');
 
 
 
@@ -167,9 +166,13 @@ tabsContainer.addEventListener('click', function (e) {
 // if there is no clicked then return nothing
 if(!clicked) return ;
 // Active tab
-console.log(tabs)
+// console.log(tabs)
+// remove active classes
 tabs.forEach(tab => tab.classList.remove('.operations__tab--active'))
+tabsContent.forEach(t => t.classList.remove
+  ('operations__content--active'))
 
 clicked.classList.add('operations__tab--active');
-
+// Activate content area;
+ document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 })
