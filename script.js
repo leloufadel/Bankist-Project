@@ -15,6 +15,7 @@ const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
 const allSections = document.querySelectorAll('.section');
+const slides = document.querySelectorAll('.slide');
 
 
 const openModal = function (e) {
@@ -193,5 +194,28 @@ rootMargin:'200px',
 imgTargets.forEach(img => imgObserver.observe(img));
 
 
+// slider : 
+const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const maxslide = slides.length;
+let curSlide = 0;
 
+slider.style.transform = 'scale(0.3)';
+slider.style.overflow = 'visible'
 
+slides.forEach((s, i) => s.style.transform = 
+`translateX(${100 * i}%)`)
+btnRight.addEventListener('click', function(){
+  if( curSlide === maxslide -1){
+    curSlide = 0;
+  }
+  else{
+    curSlide++;
+  }
+ 
+  slides.forEach((s, i) => (s.style.transform =
+     `translateX(${100 * (i-curSlide)}%)`)
+
+  )
+})
