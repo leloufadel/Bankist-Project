@@ -14,6 +14,7 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const allSections = document.querySelectorAll('.section');
 
 
 const openModal = function (e) {
@@ -108,6 +109,8 @@ const handleHover = function(e) {
     logo.style.opacity = this;
   }
 }
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 // Add sticky class : 
 
@@ -137,12 +140,28 @@ stickyNav, {
   root: null,
   threshold: 0,
   rootMargin: `-${navHeight}px` 
-}
-
-);
+});
 
 headerObserver.observe(header);
 
 
-nav.addEventListener('mouseover', handleHover.bind(0.5));
-nav.addEventListener('mouseout', handleHover.bind(1));
+// Revealing Elements: 
+const revelSection = function (entries, Observer){
+const [entry] = entries;
+// console.log(entry);
+if(!entry.isIntersecting) return;
+ entry.target.classList.remove('section--hidden');
+}
+
+const sectionObserver = new IntersectionObserver(revelSection, 
+
+  {
+    root: null,
+    threshold: 0.15,
+  });
+
+  allSections.forEach(function(section)
+  {
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+  })
