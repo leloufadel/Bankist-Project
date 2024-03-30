@@ -122,7 +122,7 @@ const handleHover = function(e) {
 // })
 
 // sticky navigation: Intersection Observer API
-
+const navHeigh = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
  const [entries] = entries; // entries[0]
