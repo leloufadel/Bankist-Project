@@ -147,12 +147,12 @@ headerObserver.observe(header);
 
 
 // Revealing Elements: 
-const revelSection = function (entries, Observer){
+const revelSection = function (entries, observer){
 const [entry] = entries;
 // console.log(entry);
 if(!entry.isIntersecting) return;
  entry.target.classList.remove('section--hidden');
- Observer.unobserver(entry.target);
+ observer.unobserve(entry.target);
 }
 
 const sectionObserver = new IntersectionObserver(revelSection, 
@@ -204,18 +204,36 @@ let curSlide = 0;
 slider.style.transform = 'scale(0.3)';
 slider.style.overflow = 'visible'
 
-slides.forEach((s, i) => s.style.transform = 
-`translateX(${100 * i}%)`)
-btnRight.addEventListener('click', function(){
+
+// Refactor 
+const goToSlide = function(slide){
+  slides.forEach((s, i) => (s.style.transform =
+    `translateX(${100 * (i-slide)}%)`)
+ )
+}
+goToSlide(0);
+// Next Slide ;
+const nextSlide = function(){
   if( curSlide === maxslide -1){
     curSlide = 0;
   }
   else{
     curSlide++;
   }
+ goToSlide(curSlide);
  
-  slides.forEach((s, i) => (s.style.transform =
-     `translateX(${100 * (i-curSlide)}%)`)
+}
+const prevSlide = function(){
+  if(curSlide === 0){
+    curSlide = maxslide - 1;
+  }
+  else{
+    curSlide--;
+  }
+  
+  goToSlide(curSlide);
+}
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
 
-  )
-})
+
