@@ -7,7 +7,7 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const header = document.querySelector('header');
+const header = document.querySelector('.header');
 const h1 = document.querySelector('h1');
 const section1 = document.getElementById('section--1');
 const tabs = document.querySelectorAll('.operations__tab');
@@ -107,7 +107,38 @@ const handleHover = function(e) {
     logo.style.opacity = this;
   }
 }
-// Menu fade animation
+
+// Add sticky class : 
+
+// const intialcoords = section1.getBoundingClientRect();
+// // console.log(intialcoords);
+// window.addEventListener('scroll', function (){
+//   // console.log(scrollY);
+//   if(this.window.scrollY > intialcoords.top) nav.classList.add('sticky');
+//  else
+//     nav.classList.remove('sticky');
+  
+
+// })
+
+// sticky navigation: Intersection Observer API
+
+
+const stickyNav = function (entries) {
+ const [entries] = entries; // entries[0]
+};
+
+const headerObserver = new IntersectionObserver (
+stickyNav, {
+  root: null,
+  threshold: 0, 
+  rootMargin: -90px,
+}
+
+);
+
+
+
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
