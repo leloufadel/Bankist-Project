@@ -40,18 +40,19 @@ document.addEventListener('keydown', function (e) {
 });
 
 const message = document.createElement('div');
-message.classList.add('cookie-message');
-console.log(message)
-message.innerHTML = `we use cookies to improve functionalities and analysis. 
-<button class= "btn btn--close-cookie">Got it</button>`
 
-header.append(message);
+// message.classList.add('cookie-message');
+// console.log(message)
+// message.innerHTML = `we use cookies to improve functionalities and analysis. 
+// <button class= "btn btn--close-cookie">Got it</button>`
+
+// header.append(message);
 
 
-document.querySelector('.btn--close-cookie').addEventListener('click', function(){
-  message.remove();
+// document.querySelector('.btn--close-cookie').addEventListener('click', function(){
+//   message.remove();
  
-});
+// });
 
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
@@ -107,7 +108,41 @@ const handleHover = function(e) {
     logo.style.opacity = this;
   }
 }
-// Menu fade animation
+
+// Add sticky class : 
+
+// const intialcoords = section1.getBoundingClientRect();
+// // console.log(intialcoords);
+// window.addEventListener('scroll', function (){
+//   // console.log(scrollY);
+//   if(this.window.scrollY > intialcoords.top) nav.classList.add('sticky');
+//  else
+//     nav.classList.remove('sticky');
+  
+
+// })
+
+// sticky navigation: Intersection Observer API
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+ const [entry] = entries; // entries[0]
+
+ if(!entry.isIntersecting) nav.classList.add('sticky');
+ else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver (
+stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px` 
+}
+
+);
+
+headerObserver.observe(header);
+
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
