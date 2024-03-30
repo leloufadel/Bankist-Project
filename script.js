@@ -7,7 +7,7 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const header = document.querySelector('.header');
+const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const section1 = document.getElementById('section--1');
 const tabs = document.querySelectorAll('.operations__tab');
@@ -40,18 +40,19 @@ document.addEventListener('keydown', function (e) {
 });
 
 const message = document.createElement('div');
-message.classList.add('cookie-message');
-console.log(message)
-message.innerHTML = `we use cookies to improve functionalities and analysis. 
-<button class= "btn btn--close-cookie">Got it</button>`
 
-header.append(message);
+// message.classList.add('cookie-message');
+// console.log(message)
+// message.innerHTML = `we use cookies to improve functionalities and analysis. 
+// <button class= "btn btn--close-cookie">Got it</button>`
+
+// header.append(message);
 
 
-document.querySelector('.btn--close-cookie').addEventListener('click', function(){
-  message.remove();
+// document.querySelector('.btn--close-cookie').addEventListener('click', function(){
+//   message.remove();
  
-});
+// });
 
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
@@ -122,22 +123,25 @@ const handleHover = function(e) {
 // })
 
 // sticky navigation: Intersection Observer API
-const navHeigh = nav.getBoundingClientRect().height;
+const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
- const [entries] = entries; // entries[0]
+ const [entry] = entries; // entries[0]
+
+ if(!entry.isIntersecting) nav.classList.add('sticky');
+ else nav.classList.remove('sticky');
 };
 
 const headerObserver = new IntersectionObserver (
 stickyNav, {
   root: null,
-  threshold: 0, 
-  rootMargin: -90px,
+  threshold: 0,
+  rootMargin: `-${navHeight}px` 
 }
 
 );
 
-
+headerObserver.observe(header);
 
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
