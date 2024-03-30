@@ -146,26 +146,26 @@ headerObserver.observe(header);
 
 
 // Revealing Elements: 
-const revelSection = function (entries, Observer){
-const [entry] = entries;
-// console.log(entry);
-if(!entry.isIntersecting) return;
- entry.target.classList.remove('section--hidden');
- Observer.unobserver(entry.target);
-}
+// const revelSection = function (entries, Observer){
+// const [entry] = entries;
+// // console.log(entry);
+// if(!entry.isIntersecting) return;
+//  entry.target.classList.remove('section--hidden');
+//  Observer.unobserver(entry.target);
+// }
 
-const sectionObserver = new IntersectionObserver(revelSection, 
+// const sectionObserver = new IntersectionObserver(revelSection, 
 
-  {
-    root: null,
-    threshold: 0.15,
-  });
+//   {
+//     root: null,
+//     threshold: 0.15,
+//   });
 
-  allSections.forEach(function(section)
-  {
-    sectionObserver.observe(section);
-    section.classList.add('section--hidden');
-  })
+//   allSections.forEach(function(section)
+//   {
+//     sectionObserver.observe(section);
+//     section.classList.add('section--hidden');
+//   })
 
 // lazy loading Images:
 const imgTargets = document.querySelectorAll('img[data-src]');
