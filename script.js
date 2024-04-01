@@ -253,33 +253,41 @@ const Maxslide = slides.length;
 
 
 
-// dots
-  
+// Functions
+
 const createDots = function(){
   slides.forEach(function(_, i){
     dotContainer.insertAdjacentHTML('beforeend',
     `<button class="dots__dot" data-slide="${i}"></button>`
     );
   });
-  
 };
-createDots();
+
 
 // Activate Dots : 
 const activateDots = function(slide){
-  // select all dots and then unactivate all of them exclusing the current dot.
-
-  document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
+document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
 
 document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
 
 }
-// add tarnslateX to the slides; 
 const goToSlide = function (slide){
   slides.forEach((s, i) =>
   s.style.transform = `translateX(${100 * (i - slide)}%)`);
 }
-goToSlide(0);
+
+// function for keywords:
+const dotsDot = function(e){
+  if(e.key === 'ArrowLeft') prevSlide();
+  (e.key === 'ArrowRight') && nextSlide();
+  
+  if(e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+    activateDots(slide)
+    }
+}
+// event Handlers
 const nextSlide = function(){
   if( curSlide ===  Maxslide - 1 ){
     curSlide = 0;
@@ -305,20 +313,16 @@ activateDots(curSlide)
 
   btnRight.addEventListener('click', nextSlide);
   btnLeft.addEventListener('click', prevSlide);
+  document.addEventListener('keydown', dotsDot)
+  dotContainer.addEventListener('click', dotsDot)
+// init function 
+const init = function (){
+  goToSlide(0);
+  createDots();
+  activateDots(0)
 
-
-// function for keywords:
-const dotsDot = function(e){
-  if(e.key === 'ArrowLeft') prevSlide();
-  (e.key === 'ArrowRight') && nextSlide();
-  
-  if(e.target.classList.contains('dots__dot')) {
-    const { slide } = e.target.dataset;
-    goToSlide(slide);
-    activateDots(slide)
-    }
 }
-document.addEventListener('keydown', dotsDot 
- )
- 
-dotContainer.addEventListener('click', dotsDot)
+init();
+
+
+
