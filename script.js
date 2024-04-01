@@ -264,6 +264,16 @@ const createDots = function(){
   
 };
 createDots();
+
+// Activate Dots : 
+const activateDots = function(slide){
+  // select all dots and then unactivate all of them exclusing the current dot.
+
+  document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
+
+document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+
+}
 // add tarnslateX to the slides; 
 const goToSlide = function (slide){
   slides.forEach((s, i) =>
@@ -278,6 +288,8 @@ const nextSlide = function(){
   curSlide++ 
 }
 goToSlide(curSlide);
+activateDots(curSlide)
+
 };
 const prevSlide = function(){
 
@@ -288,19 +300,22 @@ else {
  curSlide --;
 }
 goToSlide(curSlide);
+activateDots(curSlide)
 }
 
   btnRight.addEventListener('click', nextSlide);
   btnLeft.addEventListener('click', prevSlide);
 
+
 // function for keywords:
 const dotsDot = function(e){
   if(e.key === 'ArrowLeft') prevSlide();
   (e.key === 'ArrowRight') && nextSlide();
-
+  
   if(e.target.classList.contains('dots__dot')) {
     const { slide } = e.target.dataset;
     goToSlide(slide);
+    activateDots(slide)
     }
 }
 document.addEventListener('keydown', dotsDot 
