@@ -247,18 +247,30 @@ imgTargets.forEach(img => imgObserver.observe(img));
 const slider = document.querySelector('.slider');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
-const dotscontainer = document.querySelector('.dots')
+const dotContainer = document.querySelector('.dots')
 let curSlide = 0;
 const Maxslide = slides.length;
 
 
 
 // dots
+  
+const createDots = function(){
+  slides.forEach(function(_, i){
+    dotContainer.insertAdjacentHTML('beforeend',
+    
+    `<button class="dots__dot" data-slide="${i}"></button>`
+    );
 
+  });
+  
+};
+
+createDots();
 // add tarnslateX to the slides; 
-const goToSlide = function (){
+const goToSlide = function (slide){
   slides.forEach((s, i) =>
-  s.style.transform = `translateX(${100 * (i - curSlide)}%)`);
+  s.style.transform = `translateX(${100 * (i - slide)}%)`);
 }
 goToSlide(0);
 const nextSlide = function(){
@@ -284,17 +296,12 @@ goToSlide(curSlide);
   btnRight.addEventListener('click', nextSlide);
   btnLeft.addEventListener('click', prevSlide);
 
-  
-const createdots = function(){
-  slides.forEach(function(s, i){
-    dotscontainer.insertAdjacentHTML('beforeend', `<button class="dots__dot data-slide=${i}"></button>`)
 
-  } )
-  
-}
-
-createdots();
  
-dotscontainer.addEventListener('click', function(e){
-  console.log(e.target.classList)
+dotContainer.addEventListener('click', function(e){
+  if(e.target.classList.contains('dots__dot')) {
+  const { slide } = e.target.dataset;
+  console.log(slide)
+  goToSlide(slide);
+  }
 })
