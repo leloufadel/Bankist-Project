@@ -258,14 +258,11 @@ const Maxslide = slides.length;
 const createDots = function(){
   slides.forEach(function(_, i){
     dotContainer.insertAdjacentHTML('beforeend',
-    
     `<button class="dots__dot" data-slide="${i}"></button>`
     );
-
   });
   
 };
-
 createDots();
 // add tarnslateX to the slides; 
 const goToSlide = function (slide){
@@ -283,7 +280,7 @@ const nextSlide = function(){
 goToSlide(curSlide);
 };
 const prevSlide = function(){
-console.log(curSlide); 
+
 if (curSlide === 0){
   curSlide = Maxslide - 1;
 }
@@ -296,12 +293,17 @@ goToSlide(curSlide);
   btnRight.addEventListener('click', nextSlide);
   btnLeft.addEventListener('click', prevSlide);
 
+// function for keywords:
+const dotsDot = function(e){
+  if(e.key === 'ArrowLeft') prevSlide();
+  (e.key === 'ArrowRight') && nextSlide();
 
- 
-dotContainer.addEventListener('click', function(e){
   if(e.target.classList.contains('dots__dot')) {
-  const { slide } = e.target.dataset;
-  console.log(slide)
-  goToSlide(slide);
-  }
-})
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+    }
+}
+document.addEventListener('keydown', dotsDot 
+ )
+ 
+dotContainer.addEventListener('click', dotsDot)
