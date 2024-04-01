@@ -194,46 +194,91 @@ rootMargin:'200px',
 imgTargets.forEach(img => imgObserver.observe(img));
 
 
+// // slider : 
+// const slider = document.querySelector('.slider');
+// const btnLeft = document.querySelector('.slider__btn--left');
+// const btnRight = document.querySelector('.slider__btn--right');
+// const maxslide = slides.length;
+// let curSlide = 0;
+
+
+// // Refactor 
+// const goToSlide = function(slide){
+//   slides.forEach((s, i) => (s.style.transform =
+//     `translateX(${100 * (i-slide)}%)`)
+//  )
+// }
+// goToSlide(0);
+// // Next Slide ;
+// const nextSlide = function(){
+//   if( curSlide === maxslide -1){
+//     curSlide = 0;
+//   }
+//   else{
+//     curSlide++;
+//   }
+//  goToSlide(curSlide);
+ 
+// }
+// const prevSlide = function(){
+//   if(curSlide === 0){
+//     curSlide = maxslide - 1;
+//   }
+//   else{
+//     curSlide--;
+//   }
+  
+//   goToSlide(curSlide);
+// }
+// btnRight.addEventListener('click', nextSlide);
+// btnLeft.addEventListener('click', prevSlide);
+
+
+
+
+
+
+
+
+
+
+
 // slider : 
 const slider = document.querySelector('.slider');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
-const maxslide = slides.length;
+
 let curSlide = 0;
-
-slider.style.transform = 'scale(0.3)';
-slider.style.overflow = 'visible'
-
-
-// Refactor 
-const goToSlide = function(slide){
-  slides.forEach((s, i) => (s.style.transform =
-    `translateX(${100 * (i-slide)}%)`)
- )
+const Maxslide = slides.length;
+// add tarnslateX to the slides; 
+const goToSlide = function (){
+  slides.forEach((s, i) =>
+  s.style.transform = `translateX(${100 * (i - curSlide)}%)`);
 }
 goToSlide(0);
-// Next Slide ;
 const nextSlide = function(){
-  if( curSlide === maxslide -1){
+  if( curSlide ===  Maxslide - 1 ){
     curSlide = 0;
-  }
-  else{
-    curSlide++;
-  }
- goToSlide(curSlide);
- 
+  } 
+  else {
+  curSlide++ 
 }
+goToSlide(curSlide);
+};
 const prevSlide = function(){
-  if(curSlide === 0){
-    curSlide = maxslide - 1;
-  }
-  else{
-    curSlide--;
-  }
-  
-  goToSlide(curSlide);
+console.log(curSlide); 
+if (curSlide === 0){
+  curSlide = Maxslide - 1;
 }
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
+else {
+ curSlide --;
+}
+goToSlide(curSlide);
+}
 
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  
+ 
 
