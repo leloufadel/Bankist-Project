@@ -244,14 +244,13 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 
 // slider : 
+const slider = function (){
 const slider = document.querySelector('.slider');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
 const dotContainer = document.querySelector('.dots')
 let curSlide = 0;
 const Maxslide = slides.length;
-
-
 
 // Functions
 
@@ -323,6 +322,6 @@ const init = function (){
 
 }
 init();
-
-
+}
+slider();
 
