@@ -41,51 +41,20 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const message = document.createElement('div');
-
-// message.classList.add('cookie-message');
-// console.log(message)
-// message.innerHTML = `we use cookies to improve functionalities and analysis. 
-// <button class= "btn btn--close-cookie">Got it</button>`
-
-// header.append(message);
-
-
-// document.querySelector('.btn--close-cookie').addEventListener('click', function(){
-//   message.remove();
- 
-// });
-
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
-
-console.log(getComputedStyle(message).height);
-
-// add 10 px to message.height;
-console.log(message.style.height = Number.parseFloat((getComputedStyle(message).height, 10) + 10 + 'px'));
-
-const logo = document.querySelector('.nav__logo');
-console.log(logo.src);
-console.log(logo.alt);
-console.log(logo.getAttribute('designer'));
-console.log(logo.dataset.versionNumber);
-
 document.querySelector('.nav__links').addEventListener('click', function(e){
   e.preventDefault();
   // Matching Strategy
   if (e.target.classList.contains('nav__link')) {
     const id = e.target.getAttribute('href');
-      // console.log(id)
+     
       document.querySelector(id).scrollIntoView({
         behavior: 'smooth'
       });
   }
 });
 
-
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
-  console.log(clicked);
 // if there is no clicked then return nothing
 if(!clicked) return ;
 
@@ -113,19 +82,6 @@ const handleHover = function(e) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
-// Add sticky class : 
-
-// const intialcoords = section1.getBoundingClientRect();
-// // console.log(intialcoords);
-// window.addEventListener('scroll', function (){
-//   // console.log(scrollY);
-//   if(this.window.scrollY > intialcoords.top) nav.classList.add('sticky');
-//  else
-//     nav.classList.remove('sticky');
-  
-
-// })
-
 // sticky navigation: Intersection Observer API
 const navHeight = nav.getBoundingClientRect().height;
 
@@ -149,7 +105,6 @@ headerObserver.observe(header);
 // Revealing Elements: 
 const revelSection = function (entries, observer){
 const [entry] = entries;
-// console.log(entry);
 if(!entry.isIntersecting) return;
  entry.target.classList.remove('section--hidden');
  observer.unobserve(entry.target);
@@ -192,57 +147,6 @@ rootMargin:'200px',
   })
 
 imgTargets.forEach(img => imgObserver.observe(img));
-
-
-// // slider : 
-// const slider = document.querySelector('.slider');
-// const btnLeft = document.querySelector('.slider__btn--left');
-// const btnRight = document.querySelector('.slider__btn--right');
-// const maxslide = slides.length;
-// let curSlide = 0;
-
-
-// // Refactor 
-// const goToSlide = function(slide){
-//   slides.forEach((s, i) => (s.style.transform =
-//     `translateX(${100 * (i-slide)}%)`)
-//  )
-// }
-// goToSlide(0);
-// // Next Slide ;
-// const nextSlide = function(){
-//   if( curSlide === maxslide -1){
-//     curSlide = 0;
-//   }
-//   else{
-//     curSlide++;
-//   }
-//  goToSlide(curSlide);
- 
-// }
-// const prevSlide = function(){
-//   if(curSlide === 0){
-//     curSlide = maxslide - 1;
-//   }
-//   else{
-//     curSlide--;
-//   }
-  
-//   goToSlide(curSlide);
-// }
-// btnRight.addEventListener('click', nextSlide);
-// btnLeft.addEventListener('click', prevSlide);
-
-
-
-
-
-
-
-
-
-
-
 // slider : 
 const slider = function (){
 const slider = document.querySelector('.slider');
